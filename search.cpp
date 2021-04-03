@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     }
     if (argc > 2)
     {
-        if (strcmp(argv[1], "less") == 0)
+        if (strcmp(argv[1], "-l") == 0 | strcmp(argv[1], "--less") == 0)
         {
             int x; string whole, withspace;
             for (x = 2; x < argc; x++)
