@@ -47,10 +47,11 @@ void search(string searchquery, string engine)
     system(command.c_str());
 }
 
-string compile_search(int xargc, char* xargv[])
+string compile_search(int xargc, char* xargv[], bool extend_selection)
 {
-    int x; string whole, withspace;
-    for (x = 2; x < xargc; x++)
+    int x, y; string whole, withspace;
+    if (extend_selection) { y = 2; } else { y = 1; }
+    for (x = y; x < xargc; x++)
     {
         withspace = xargv[x];
         if (x < xargc - 1)
@@ -72,23 +73,23 @@ int main(int argc, char* argv[])
     {
         if (strcmp(argv[1], "-l") == 0 | strcmp(argv[1], "--less") == 0)
         {
-            search(compile_search(argc, argv), "less");
+            search(compile_search(argc, argv, true), "less");
         }
         else if (strcmp(argv[1], "-g") == 0 | strcmp(argv[1], "--google") == 0)
         {
-            search(compile_search(argc, argv), "google");
+            search(compile_search(argc, argv, true), "google");
         }
         else if (strcmp(argv[1], "-yt") == 0 | strcmp(argv[1], "--youtube") == 0)
         {
-            search(compile_search(argc, argv), "youtube");
+            search(compile_search(argc, argv, true), "youtube");
         }
         else if (strcmp(argv[1], "-gh") == 0 | strcmp(argv[1], "--github") == 0)
         {
-            search(compile_search(argc, argv), "github");
+            search(compile_search(argc, argv, true), "github");
         }
         else
         {
-            search(compile_search(argc, argv), "duck");
+            search(compile_search(argc, argv, false), "duck");
         }
     }
 }
